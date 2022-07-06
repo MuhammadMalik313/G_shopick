@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +20,9 @@ class CarouselProduct extends StatelessWidget {
         options: CarouselOptions(
           enlargeCenterPage: true,
           height: 300,
-          
+
           autoPlay: true,
-          autoPlayInterval: Duration(seconds: 5),
+          autoPlayInterval: Duration(seconds: 3),
           reverse: false,
           // aspectRatio: 5.0,
         ),

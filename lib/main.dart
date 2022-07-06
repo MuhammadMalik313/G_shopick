@@ -1,11 +1,10 @@
 import 'package:e_cart/constatnts/color/colors.dart';
-import 'package:e_cart/controller/bottombar_pagecontroller.dart';
+import 'package:e_cart/presentation/Screens/address/addressdetails/addressdetailspage.dart';
 import 'package:e_cart/presentation/Screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'presentation/Screens/productdetails/productdtails.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
