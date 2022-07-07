@@ -1,5 +1,7 @@
 import 'package:e_cart/constatnts/color/colors.dart';
 import 'package:e_cart/presentation/Screens/address/addressdetails/addressdetailspage.dart';
+import 'package:e_cart/presentation/Screens/orderdetails/orderdetails.dart';
+import 'package:e_cart/presentation/Screens/payment/paymentscreen.dart';
 import 'package:e_cart/presentation/Screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
                       MaterialStateProperty.all<Color>(appThemecolor)))),
       debugShowCheckedModeBanner: false,
       title: "E-Cart",
-      home: SplashScreen(),
+      home: OrderDetailsPage(),
     );
   }
 }

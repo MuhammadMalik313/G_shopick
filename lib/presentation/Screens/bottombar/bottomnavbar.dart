@@ -1,6 +1,6 @@
 import 'package:e_cart/controller/bottombar_pagecontroller.dart';
 import 'package:e_cart/presentation/Screens/bottombar/account_scrren.dart';
-import 'package:e_cart/presentation/Screens/bottombar/cart_screen.dart';
+import 'package:e_cart/presentation/Screens/cart/cart_screen.dart';
 import 'package:e_cart/presentation/Screens/bottombar/homescreen.dart';
 import 'package:e_cart/presentation/Screens/bottombar/orders_screen.dart';
 import 'package:e_cart/presentation/Screens/bottombar/wish_list_screen.dart';

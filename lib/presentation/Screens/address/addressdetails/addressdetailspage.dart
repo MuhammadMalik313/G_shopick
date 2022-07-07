@@ -1,6 +1,7 @@
 import 'package:e_cart/constatnts/color/colors.dart';
 import 'package:e_cart/constatnts/textstyle/textstyle.dart';
 import 'package:e_cart/presentation/Screens/address/addressdetails/addaddress.dart';
+import 'package:e_cart/presentation/Screens/payment/paymentscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -90,16 +91,17 @@ class AddressDetailsPage extends StatelessWidget {
                               "Carnival Infopark,\nPhase 2,\nKakkanadu,\nPin  : 691304\nkerala,\nIndia,\nPhone number:994767656",
                               style: TextStyle(fontSize: 15),
                             ),
-                            Wrap(
-                              children: [
-                                IconButton(
-                                  padding: EdgeInsets.only(bottom: 100),
-                                  onPressed: (){}, icon: Icon(Icons.edit),),
-                                Icon(
+                            Wrap(children: [
+                              IconButton(
+                                padding: EdgeInsets.only(bottom: 100),
+                                onPressed: () {},
+                                icon: Icon(Icons.edit),
+                              ),
+                              Icon(
                                 Icons.album_outlined,
                                 color: appThemecolor,
-                              ),]
-                            )
+                              ),
+                            ])
                           ],
                         ),
                       ),
@@ -110,7 +112,9 @@ class AddressDetailsPage extends StatelessWidget {
               ),
               ksizedbox,
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => PaymentPage());
+                },
                 style: ElevatedButton.styleFrom(
                   // primary: appThemecolor,
                   elevation: 4,
