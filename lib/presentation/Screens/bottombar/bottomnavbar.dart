@@ -24,7 +24,7 @@ class BottomNavBarWidgetchange extends StatelessWidget {
             index: controller.tabindex,
             children: [
               HomePage(),
-              CartScreen(),
+              // CartScreen(),
               OrderScreen(),
               WishListScreen(),
               AccountScreen()
@@ -38,8 +38,8 @@ class BottomNavBarWidgetchange extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           items: [
             _bottomNavigatoritems(CupertinoIcons.home, "Home"),
-            _bottomNavigatoritems(Icons.shopping_bag, "Cart"),
-            _bottomNavigatoritems(Icons.shopping_cart, "Orders"),
+            _bottomNavigatoritems(Icons.shopping_bag, "Orders"),
+          //_bottomNavigatoritems(Icons.shopping_cart, "Orders"),
             _bottomNavigatoritems(Icons.favorite_outlined, "Wishlist"),
             _bottomNavigatoritems(Icons.person, "Account")
           ]),

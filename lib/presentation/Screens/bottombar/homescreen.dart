@@ -1,6 +1,9 @@
 import 'package:e_cart/constatnts/color/colors.dart';
+import 'package:e_cart/presentation/Screens/bottombar/orders_screen.dart';
 import 'package:e_cart/presentation/Screens/bottombar/widgets/homeavatar.dart';
+import 'package:e_cart/presentation/Screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,6 +18,15 @@ class HomePage extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      Get.to(() => CartScreen());
+                    },
+                    icon: Icon(Icons.shopping_cart)),
+                // leading:
+              ],
+              // leading: IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart)),
               automaticallyImplyLeading: false,
               toolbarHeight: hsize * 0.035,
               backgroundColor: appThemecolor,
@@ -103,7 +115,6 @@ class CardWidget extends StatelessWidget {
     "https://static.javatpoint.com/tutorial/flutter/images/flutter-logo.png",
     "https://static.javatpoint.com/tutorial/flutter/images/flutter-logo.png",
     "https://static.javatpoint.com/tutorial/flutter/images/flutter-logo.png",
-   
   ];
 
   List<String> homeProductdetails = [
@@ -115,7 +126,6 @@ class CardWidget extends StatelessWidget {
     "Apple iPhone 13 pro max\ Graphite 512GB 5G",
     "Apple iPhone 13 pro max\  Graphite 512GB 5G",
     "Apple iPhone 13 pro max\  Graphite 512GB 5G",
-  
   ];
   List<String> homeProductPrice = [
     "₹139,900.00",
@@ -126,7 +136,6 @@ class CardWidget extends StatelessWidget {
     "₹60,000",
     "₹15,999",
     "₹60,380"
-
   ];
 
   @override
@@ -144,7 +153,7 @@ class CardWidget extends StatelessWidget {
             childAspectRatio: 50 / 80),
         itemBuilder: (BuildContext context, int index) {
           return Stack(
-            alignment: AlignmentDirectional.bottomEnd ,
+            alignment: AlignmentDirectional.bottomEnd,
             children: [
               Card(
                 shape: RoundedRectangleBorder(
@@ -168,7 +177,8 @@ class CardWidget extends StatelessWidget {
                       homeProductdetails[index],
                       textAlign: TextAlign.center,
                       style: GoogleFonts.manrope(
-                          textStyle: TextStyle(fontSize: 11, color: appThemecolor)),
+                          textStyle:
+                              TextStyle(fontSize: 11, color: appThemecolor)),
                     ),
                     Text(homeProductPrice[index],
                         textAlign: TextAlign.center,
@@ -178,8 +188,8 @@ class CardWidget extends StatelessWidget {
                   ],
                 ),
               ),
-
-              IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline_outlined))
+              IconButton(
+                  onPressed: () {}, icon: Icon(Icons.favorite_outline_outlined))
             ],
           );
         },

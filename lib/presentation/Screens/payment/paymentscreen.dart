@@ -37,7 +37,7 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 218, 234, 241),
       body: Padding(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.all(12),
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -146,7 +146,7 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
                     style: ElevatedButton.styleFrom(
                       // primary: appThemecolor,
                       elevation: 4,
-                      fixedSize: const Size(400, 45),
+                      fixedSize: const Size(400, 0),
                     ),
                     child: Text(
                       "CONFIRM",
