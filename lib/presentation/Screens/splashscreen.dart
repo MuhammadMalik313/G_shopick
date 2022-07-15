@@ -1,9 +1,10 @@
 import 'package:e_cart/constatnts/color/colors.dart';
-import 'package:e_cart/presentation/Screens/signupscreen.dart';
+import 'package:e_cart/presentation/Screens/bottombar/homescreen.dart';
+import 'package:e_cart/presentation/Screens/login.dart';
+import 'package:e_cart/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-         duration: 1600,
+        duration: 1600,
         splash: Column(
           children: [
             const SizedBox(
@@ -40,7 +41,15 @@ class SplashScreen extends StatelessWidget {
           ],
         ),
         splashIconSize: 200,
-        nextScreen: const SignUpScreen(),
+        nextScreen: StreamBuilder(
+          stream: Authservice().firebaseAuth.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return HomePage();
+            }
+            return LoginScreen();
+          },
+        ),
         splashTransition: SplashTransition.slideTransition,
         backgroundColor: appThemecolor);
   }

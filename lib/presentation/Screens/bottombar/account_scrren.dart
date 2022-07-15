@@ -41,12 +41,11 @@ class AccountScreen extends GetView<AccountController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 120, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 120, left: 20, right: 20),
                 child: Container(
                   // color: Colors.red,
                   width: double.infinity,
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 74,
                     child: CircleAvatar(
@@ -62,23 +61,30 @@ class AccountScreen extends GetView<AccountController> {
                 ),
               ),
             ],
-          ),Text("Muhammad Malik",style: GoogleFonts.inder(textStyle: TextStyle(fontSize: 25)),
-          textAlign: TextAlign.center,),
+          ),
+          Text(
+            "Muhammad Malik",
+            style: GoogleFonts.inder(textStyle: TextStyle(fontSize: 25)),
+            textAlign: TextAlign.center,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-   ProfileWidget(profTitle: "My Account", proficon: Icons.person),
-            ProfileWidget(profTitle: "My Address", proficon: Icons.location_on),
-               ProfileWidget(profTitle: "Share App", proficon: Icons.share),
-            ProfileWidget(profTitle: "Privacy Policy", proficon: Icons.privacy_tip),
-            // ProfileWidget(profTitle: "Settings", proficon: Icons.settings),
-            ProfileWidget(profTitle: "Logout", proficon: Icons.logout_outlined),
-         
+                ProfileWidget(profTitle: "My Account", proficon: Icons.person),
+                ProfileWidget(
+                    profTitle: "My Address", proficon: Icons.location_on),
+                ProfileWidget(
+                    profTitle: "My Orders",
+                    proficon: Icons.shopping_bag_outlined),
+                ProfileWidget(profTitle: "Share App", proficon: Icons.share),
+                ProfileWidget(
+                    profTitle: "Privacy Policy", proficon: Icons.privacy_tip),
+                ProfileWidget(
+                    profTitle: "Logout", proficon: Icons.logout_outlined),
               ],
             ),
           )
-       
         ],
       ),
     );
@@ -88,18 +94,21 @@ class AccountScreen extends GetView<AccountController> {
 class ProfileWidget extends StatelessWidget {
   IconData proficon;
   String profTitle;
-  ProfileWidget({
-    Key? key,
-    required this.profTitle,
-    required this.proficon
-  }) : super(key: key);
+  ProfileWidget({Key? key, required this.profTitle, required this.proficon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
-      leading: Icon(proficon,color: Colors.black,),
-      title: Text(profTitle,style: TextStyle(color: Colors.black,fontSize: 17),),
+      leading: Icon(
+        proficon,
+        color: Colors.black,
+      ),
+      title: Text(
+        profTitle,
+        style: TextStyle(color: Colors.black, fontSize: 17),
+      ),
     );
   }
 }

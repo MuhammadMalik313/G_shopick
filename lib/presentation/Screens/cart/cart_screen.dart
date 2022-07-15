@@ -14,7 +14,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appThemecolor,
-        title: Text("My Cart"),
+        title: const Text("My Cart"),
       ),
       body: ListView.separated(
         itemCount: 2,

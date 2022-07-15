@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "134990745816",
+    "project_id": "gshopick",
+    "storage_bucket": "gshopick.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134990745816:android:c91c734471a960f809c7ad",
+        "android_client_info": {
+          "package_name": "com.example.e_cart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134990745816-epuq9l2ftvbba57jhlnn2ckglcigaumj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzIo2rdtNCj5r9asx7uBQFWQzj-kgyETo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134990745816-epuq9l2ftvbba57jhlnn2ckglcigaumj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

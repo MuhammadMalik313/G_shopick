@@ -1,15 +1,27 @@
 import 'package:e_cart/constatnts/color/colors.dart';
 import 'package:e_cart/presentation/Screens/bottombar/bottomnavbar.dart';
-import 'package:e_cart/presentation/Screens/bottombar/homescreen.dart';
+import 'package:e_cart/presentation/Screens/signupscreen.dart';
 import 'package:e_cart/presentation/textformfield/textformfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../constatnts/textstyle/textstyle.dart';
+import '../../services/auth_service.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +75,24 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: hsize * 0.01,
                       ),
-                      RichText(
-                          text: const TextSpan(children: [
-                        TextSpan(
-                            text: "Don't have an account?",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
-                        TextSpan(
-                            text: '  Sign Up ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red)),
-                      ])),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => SignUpScreen());
+                        },
+                        child: RichText(
+                            text: const TextSpan(children: [
+                          TextSpan(
+                              text: "Don't have an account?",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)),
+                          TextSpan(
+                              text: '  Sign Up ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red)),
+                        ])),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -84,32 +101,69 @@ class LoginScreen extends StatelessWidget {
                               height: hsize * .05,
                             ),
                             Textformfield(
+                           
+                                fieldControllers: emailController,
                                 textInField: "Enter Your Email",
                                 iconInfield: const Icon(Icons.email)),
                             ksizedbox,
                             Textformfield(
+                                 visiblePassword: true,
+                                fieldControllers: passwordController,
                                 textInField: "Enter Your password",
                                 iconInfield: const Icon(Icons.lock)),
                             ksizedbox,
-                            ElevatedButton(
-                              onPressed: () {
-                                Get.to(BottomNavBarWidgetchange());
-                              },
-                              style: ElevatedButton.styleFrom(
-                                // primary: appThemecolor,
-                                elevation: 4,
-                                fixedSize: const Size(330, 45),
-                              ),
-                              child: Text(
-                                "LOGIN",
-                                style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                            loading
+                                ? CircularProgressIndicator(
+                                    backgroundColor: appThemecolor,
+                                  )
+                                : ElevatedButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        loading = true;
+                                      });
+                                      if (emailController.text == "" ||
+                                          passwordController.text == "") {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(
+                                              "All fields are required!!!"),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                      } else {
+                                        User? result = await Authservice()
+                                            .login(
+                                                emailController.text,
+                                                passwordController.text,
+                                                context);
+                                        if (result != null) {
+                                          print("success");
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: ((context) =>
+                                                      BottomNavBarWidgetchange())),
+                                              (route) => false);
+                                        }
+                                      }
+                                      setState(() {
+                                        loading = false;
+                                      });
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      // primary: appThemecolor,
+                                      elevation: 4,
+                                      fixedSize: const Size(330, 45),
+                                    ),
+                                    child: Text(
+                                      "LOGIN",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
                             SizedBox(
                               height: hsize * .01,
                             ),

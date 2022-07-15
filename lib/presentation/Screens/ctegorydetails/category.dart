@@ -1,5 +1,4 @@
 import 'package:e_cart/constatnts/color/colors.dart';
-import 'package:e_cart/presentation/Screens/bottombar/widgets/homeavatar.dart';
 import 'package:e_cart/presentation/Screens/productdetails/productdtails.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -50,9 +49,41 @@ class CategoryPage extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.filter_alt_outlined,
+                              color: appThemecolor,
+                            ),
+                            Text(
+                              "Filter",
+                              style: TextStyle(color: appThemecolor),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.list_rounded,
+                              color: appThemecolor,
+                            ),
+                            Text(
+                              "View",
+                              style: TextStyle(color: appThemecolor),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                   CardWidget(
                     key: key,
-                  )
+                  ),
                 ],
               ),
             ),

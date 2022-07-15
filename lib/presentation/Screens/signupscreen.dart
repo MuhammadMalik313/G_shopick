@@ -1,14 +1,30 @@
 import 'package:e_cart/constatnts/color/colors.dart';
+import 'package:e_cart/controller/signuplogin_controller.dart';
 import 'package:e_cart/presentation/Screens/login.dart';
 import 'package:e_cart/presentation/textformfield/textformfield.dart';
+import 'package:e_cart/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../constatnts/textstyle/textstyle.dart';
+import 'bottombar/bottomnavbar.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  SignUpScreen({Key? key}) : super(key: key);
 
+  TextEditingController nameController = TextEditingController();
+
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+
+  TextEditingController confirmPasswordController = TextEditingController();
+
+    bool passwordInvisible=true;
+
+  final loadingController = Get.put(SignupLoginController());
   @override
   Widget build(BuildContext context) {
     final wsize = MediaQuery.of(context).size.width;
@@ -62,9 +78,9 @@ class SignUpScreen extends StatelessWidget {
                         height: hsize * 0.01,
                       ),
                       GestureDetector(
-                        onTap: (){
-                                Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) => LoginScreen())));
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: ((context) => LoginScreen())));
                         },
                         child: RichText(
                             text: const TextSpan(children: [
@@ -88,39 +104,103 @@ class SignUpScreen extends StatelessWidget {
                               height: hsize * .065,
                             ),
                             Textformfield(
+                                fieldControllers: nameController,
                                 textInField: "Enter Your Name",
                                 iconInfield: Icon(Icons.person)),
                             ksizedbox,
                             Textformfield(
+                                fieldControllers: emailController,
                                 textInField: "Enter Your Email",
                                 iconInfield: Icon(Icons.email)),
                             ksizedbox,
                             Textformfield(
+                                 visiblePassword: true,
+                              sufixxIconinField: IconButton(onPressed: (){
+                                 
+
+
+                              }, icon: Icon(Icons.visibility_off_sharp)), 
+                           
+                              fieldControllers: passwordController,
                               textInField: "Create password",
-                              iconInfield: Icon(Icons.lock_rounded),
+                              iconInfield: IconButton(icon:Icon(Icons.lock),onPressed: (){
+
+                              },),
                             ),
                             ksizedbox,
                             Textformfield(
+
+                                   visiblePassword: true,
+                          
+                          
+            
+                                fieldControllers: confirmPasswordController,
                                 textInField: "Confirm password",
                                 iconInfield: Icon(Icons.lock_open)),
                             ksizedbox,
-                            ElevatedButton(
-                                onPressed: () {
-                            
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  // primary: appThemecolor,
-                                  elevation: 4,
-                                  fixedSize: const Size(330, 45),
-                                ),
-                                child: Text(
-                                  "SIGN UP",
-                                  style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                                ))
+                            Obx(() {
+                                    return ElevatedButton(
+                                        onPressed: () async {
+                                          loadingController.loading.value =
+                                              true;
+
+                                          if (emailController.text.isEmpty ||
+                                              passwordController.text.isEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  "All fields are required!!!"),
+                                              backgroundColor: Colors.red,
+                                            ));
+                                          } else if (passwordController.text !=
+                                              confirmPasswordController.text) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                              content:
+                                                  Text("Passwords don't match"),
+                                              backgroundColor: Colors.red,
+                                            ));
+                                          } else {
+                                            User? result = await Authservice()
+                                                .register(
+                                                    emailController.text,
+                                                    passwordController.text,
+                                                    context);
+                                            if (result != null) {
+                                              print("success");
+                                              Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: ((context) =>
+                                                          BottomNavBarWidgetchange())),
+                                                  (route) => false);
+                                            }
+                                          }
+
+                                          loadingController.loading.value =
+                                              false;
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                           primary: appThemecolor,
+                                          elevation: 4,
+                                          fixedSize: const Size(330, 45),
+                                        ),
+                                        child: loadingController.loading.value
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  strokeWidth: 2,
+                                                ),
+                                              )
+                                            : Text(
+                                                "SIGN UP",
+                                                style: GoogleFonts.poppins(
+                                                    textStyle: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                )),
+                                              ));
+                                  })
                           ],
                         ),
                       )

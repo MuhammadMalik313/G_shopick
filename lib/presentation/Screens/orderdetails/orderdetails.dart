@@ -20,17 +20,17 @@ class OrderDetailsPage extends StatelessWidget {
             'https://assets10.lottiefiles.com/packages/lf20_5ngs2ksb.json',
             height: 70,
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Ordered",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
-              Text(
+              const Text(
                 "Ordered on june 22,2022",
                 style: TextStyle(color: Colors.grey),
               )
@@ -38,7 +38,7 @@ class OrderDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      content: Text(''),
+      content: const Text(''),
       // subtitle: Text("data"),
       isActive: true,
     ),
@@ -54,19 +54,19 @@ class OrderDetailsPage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Shipped",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
-              Text(
+              const Text(
                 "Shipped on june 22,2022",
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               )
             ],
           ),
         ],
       ),
-      content: Text(''),
+      content: const Text(''),
       // subtitle: Text("data"),
       isActive: true,
     ),
@@ -79,17 +79,17 @@ class OrderDetailsPage extends StatelessWidget {
             'https://assets4.lottiefiles.com/packages/lf20_w5oe9omf.json',
             height: 70,
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Delivered",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
-              Text(
+              const Text(
                 "Your item has been deliverd",
                 style: TextStyle(color: Colors.grey),
               )
@@ -97,7 +97,7 @@ class OrderDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      content: Text(''),
+      content: const Text(''),
       // subtitle: Text("data"),
       isActive: true,
     ),
@@ -118,11 +118,11 @@ class OrderDetailsPage extends StatelessWidget {
         child: ListView(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Order ID-RFFdsaedTRQ12D4",
               style: TextStyle(color: Colors.grey),
             ),
-            Divider(
+            const Divider(
               thickness: 1,
               color: Colors.grey,
             ),
@@ -147,7 +147,7 @@ class OrderDetailsPage extends StatelessWidget {
                       Text(
                         "iPhone 13 512GB Green",
                         style: GoogleFonts.allerta(
-                            textStyle: TextStyle(fontSize: 18)),
+                            textStyle: const TextStyle(fontSize: 18)),
                       ),
                       SizedBox(
                         height: hsize * .011,
@@ -156,10 +156,10 @@ class OrderDetailsPage extends StatelessWidget {
                         "₹79,850",
                         style: styleOftextprice,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Text(
+                      const Text(
                         "1 Item",
                         style: TextStyle(color: Colors.grey, fontSize: 15),
                       )
@@ -168,7 +168,7 @@ class OrderDetailsPage extends StatelessWidget {
                 )
               ],
             ),
-            Divider(
+            const Divider(
               thickness: 1,
               color: Colors.grey,
             ),
@@ -184,13 +184,13 @@ class OrderDetailsPage extends StatelessWidget {
                 },
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 1,
               color: Colors.grey,
             ),
-            Text(
+            const Text(
               "Shippinng details",
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
             Card(
               color: Colors.white,
@@ -200,7 +200,7 @@ class OrderDetailsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Malik\nCarnival Infopark,\nPhase 2,\nKakkanadu,\nPin  : 691304\nkerala,\nIndia,\nPhone number:994767656",
                       style: TextStyle(fontSize: 15),
                     ),
@@ -208,23 +208,23 @@ class OrderDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
+            const Text(
               "Price Details",
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
-            ListTile(
+            const ListTile(
               leading: Text(
                 "Payment method",
                 style: TextStyle(fontSize: 20),
               ),
               trailing: Text("Online payment"),
             ),
-            ListTile(
-              leading: Text(
+            const ListTile(
+              leading: const Text(
                 "Product price",
                 style: TextStyle(fontSize: 20),
               ),
-              trailing: Text("₹79,850"),
+              trailing: const Text("₹79,850"),
             )
           ],
         ),
@@ -233,9 +233,9 @@ class OrderDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
             onPressed: () {
-              Get.to(() => ChatUi());
+              Get.to(() => const ChatUi());
             },
-            child: Text("HELP")),
+            child: const Text("HELP")),
       ),
     );
   }
@@ -249,11 +249,11 @@ class ChatUi extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Ask To us"),
+        title: const Text("Ask To us"),
         backgroundColor: appThemecolor,
       ),
       body: ListView(
-        children: [
+        children: const [
           ChatBubble(
             text: 'How was the concert?',
             isCurrentUser: false,
@@ -286,7 +286,7 @@ class ChatUi extends StatelessWidget {
                             isDense: true,
                             border: OutlineInputBorder(borderRadius: BorderRadius.circular(40))),)
                         ),
-                        SizedBox(width: 3,),
+                        const SizedBox(width: 3,),
                         Expanded(
                           flex: 2,
                           child:Icon(Icons.send,size: 40,color: appThemecolor,)
