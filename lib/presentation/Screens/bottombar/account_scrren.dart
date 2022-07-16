@@ -1,23 +1,31 @@
 import 'package:e_cart/controller/account_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constatnts/color/colors.dart';
 import '../../../constatnts/textstyle/textstyle.dart';
+import '../../../controller/googlelogin_controller.dart';
+import '../../../controller/signuplogin_controller.dart';
 
 class AccountScreen extends GetView<AccountController> {
-  const AccountScreen({Key? key}) : super(key: key);
+  AccountScreen({Key? key}) : super(key: key);
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    final loadingController = Get.put(SignupLoginController());
 
   @override
   Widget build(BuildContext context) {
+    final LoginController controller = Get.put(LoginController());
     final wsize = MediaQuery.of(context).size.width;
     final hsize = MediaQuery.of(context).size.height;
     final ksizedbox = SizedBox(
       height: hsize * .03,
     );
+
+    String imageurl = firebaseAuth.currentUser!.photoURL ??
+        'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png';
+
     return Scaffold(
       body: ListView(
         children: [
@@ -45,15 +53,14 @@ class AccountScreen extends GetView<AccountController> {
                 child: Container(
                   // color: Colors.red,
                   width: double.infinity,
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 74,
                     child: CircleAvatar(
                       radius: 73,
                       backgroundColor: Colors.white,
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://w7.pngwing.com/pngs/223/244/png-transparent-computer-icons-avatar-user-profile-avatar-heroes-rectangle-black.png"),
+                        backgroundImage: NetworkImage(imageurl),
                         radius: 71,
                       ),
                     ),
@@ -63,7 +70,7 @@ class AccountScreen extends GetView<AccountController> {
             ],
           ),
           Text(
-            "Muhammad Malik",
+            firebaseAuth.currentUser!.displayName ?? 'Unknown',
             style: GoogleFonts.inder(textStyle: TextStyle(fontSize: 25)),
             textAlign: TextAlign.center,
           ),
@@ -80,8 +87,23 @@ class AccountScreen extends GetView<AccountController> {
                 ProfileWidget(profTitle: "Share App", proficon: Icons.share),
                 ProfileWidget(
                     profTitle: "Privacy Policy", proficon: Icons.privacy_tip),
-                ProfileWidget(
-                    profTitle: "Logout", proficon: Icons.logout_outlined),
+                ListTile(
+                  onTap: () {
+                        loadingController.loading.value =
+                                              false;
+                    controller.logoutGoogle();
+                
+                  },
+                  dense: true,
+                  leading: Icon(
+                    Icons.logout,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "Logout",
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                  ),
+                ),
               ],
             ),
           )
@@ -94,12 +116,15 @@ class AccountScreen extends GetView<AccountController> {
 class ProfileWidget extends StatelessWidget {
   IconData proficon;
   String profTitle;
+
   ProfileWidget({Key? key, required this.profTitle, required this.proficon})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final LoginController controller = Get.find<LoginController>();
     return ListTile(
+      onTap: () {},
       dense: true,
       leading: Icon(
         proficon,

@@ -3,21 +3,20 @@ import 'package:e_cart/presentation/Screens/bottombar/bottomnavbar.dart';
 import 'package:e_cart/presentation/Screens/signupscreen.dart';
 import 'package:e_cart/presentation/textformfield/textformfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../constatnts/textstyle/textstyle.dart';
+import '../../controller/googlelogin_controller.dart';
+import '../../controller/signuplogin_controller.dart';
 import '../../services/auth_service.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
 
-class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
@@ -30,6 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final ksizedbox = SizedBox(
       height: hsize * .03,
     );
+
+    final LoginController controller = Get.put(LoginController());
+      final loadingController = Get.put(SignupLoginController());
     return Scaffold(
       body: ListView(
         children: [
@@ -75,24 +77,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: hsize * 0.01,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => SignUpScreen());
-                        },
-                        child: RichText(
-                            text: const TextSpan(children: [
-                          TextSpan(
-                              text: "Don't have an account?",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)),
-                          TextSpan(
-                              text: '  Sign Up ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red)),
-                        ])),
-                      ),
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                            text: "Don't have an account?",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        TextSpan(
+                            text: ' Sign Up ',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Get.to(SignUpScreen());
+                              },
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red)),
+                      ])),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -101,13 +103,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: hsize * .05,
                             ),
                             Textformfield(
-                           
                                 fieldControllers: emailController,
                                 textInField: "Enter Your Email",
                                 iconInfield: const Icon(Icons.email)),
                             ksizedbox,
                             Textformfield(
-                                 visiblePassword: true,
+                                visiblePassword: true,
                                 fieldControllers: passwordController,
                                 textInField: "Enter Your password",
                                 iconInfield: const Icon(Icons.lock)),
@@ -118,9 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   )
                                 : ElevatedButton(
                                     onPressed: () async {
-                                      setState(() {
-                                        loading = true;
-                                      });
+                                      loadingController.loading.value =
+                                              true;
                                       if (emailController.text == "" ||
                                           passwordController.text == "") {
                                         ScaffoldMessenger.of(context)
@@ -145,9 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                               (route) => false);
                                         }
                                       }
-                                      setState(() {
-                                        loading = false;
-                                      });
+                                   loadingController.loading.value =
+                                              false;
                                     },
                                     style: ElevatedButton.styleFrom(
                                       // primary: appThemecolor,
@@ -193,8 +192,23 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: hsize * .01,
                             ),
-                            ElevatedButton(
-                              onPressed: () {},
+                             
+                      Obx(() =>   loadingController.loading.value
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  strokeWidth: 2,
+                                                  color: appThemecolor,
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              ):   ElevatedButton(
+                              onPressed: () {
+                                   loadingController.loading.value =
+                                              true;
+                                controller.loginWithGoogle();
+                                  //  loadingController.loading.value =
+                                  //             false;
+                              },
                               style: ElevatedButton.styleFrom(
                                 side: BorderSide(
                                     width: 1.0, color: appThemecolor),
@@ -222,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                             ),
-                          ],
+                        )],
                         ),
                       )
                     ],

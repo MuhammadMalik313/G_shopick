@@ -123,15 +123,18 @@ class CarouselDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(children: <Widget>[
-        CarouselSlider(
-          items: carouselimage,
-          carouselController: buttonCarouselController,
-          options: CarouselOptions(
-            autoPlay: true,
-            enlargeCenterPage: true,
-            viewportFraction: 0.9,
-            aspectRatio: 2.0,
-            initialPage: 2,
+        Container(
+          color: Colors.red,
+          child: CarouselSlider(
+            items: carouselimage,
+            carouselController: buttonCarouselController,
+            options: CarouselOptions(
+              autoPlay: true,
+              enlargeCenterPage: true,
+              viewportFraction: 0.9,
+              aspectRatio: 2.0,
+              initialPage: 2,
+            ),
           ),
         ),
       ]);

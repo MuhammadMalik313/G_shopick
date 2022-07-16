@@ -138,8 +138,18 @@ class SignUpScreen extends StatelessWidget {
                                 textInField: "Confirm password",
                                 iconInfield: Icon(Icons.lock_open)),
                             ksizedbox,
+                         
                             Obx(() {
-                                    return ElevatedButton(
+                                    return     loadingController.loading.value
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  strokeWidth: 2,
+                                                  color: appThemecolor,
+                                                  backgroundColor: Colors.white,
+                                                ),
+                                              )
+                                            :ElevatedButton(
                                         onPressed: () async {
                                           loadingController.loading.value =
                                               true;
@@ -147,7 +157,7 @@ class SignUpScreen extends StatelessWidget {
                                           if (emailController.text.isEmpty ||
                                               passwordController.text.isEmpty) {
                                             ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
+                                                .showSnackBar(const SnackBar(
                                               content: Text(
                                                   "All fields are required!!!"),
                                               backgroundColor: Colors.red,
@@ -163,11 +173,13 @@ class SignUpScreen extends StatelessWidget {
                                           } else {
                                             User? result = await Authservice()
                                                 .register(
-                                                    emailController.text,
-                                                    passwordController.text,
-                                                    context);
+                                                    emailController.text.trim(),
+                                                    passwordController.text.trim(),
+                                                    context,
+                                                    nameController.text.trim(),
+                                                    );
                                             if (result != null) {
-                                              print("success");
+                                          
                                               Navigator.pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
@@ -185,14 +197,7 @@ class SignUpScreen extends StatelessWidget {
                                           elevation: 4,
                                           fixedSize: const Size(330, 45),
                                         ),
-                                        child: loadingController.loading.value
-                                            ? Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  strokeWidth: 2,
-                                                ),
-                                              )
-                                            : Text(
+                                        child: Text(
                                                 "SIGN UP",
                                                 style: GoogleFonts.poppins(
                                                     textStyle: TextStyle(

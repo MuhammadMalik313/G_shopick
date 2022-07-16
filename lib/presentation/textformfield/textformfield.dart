@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class Textformfield extends StatefulWidget {
   String textInField;
   Widget iconInfield;
-  dynamic fieldControllers;
+  TextEditingController fieldControllers;
   bool visiblePassword;
   Widget? sufixxIconinField;
 
@@ -25,21 +25,30 @@ class Textformfield extends StatefulWidget {
 class _TextformfieldState extends State<Textformfield> {
   @override
   Widget build(BuildContext context) {
+  
+
     return TextFormField(
         obscureText: widget.visiblePassword,
         controller: widget.fieldControllers,
+        keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           isDense: true,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           labelText: widget.textInField,
           prefixIcon: widget.iconInfield,
-          suffixIcon: widget.textInField=="Create password" || widget.textInField=="Confirm password"|| widget.textInField=="Enter Your password"? IconButton(
-              onPressed: () {
-                setState(() {
-                  widget.visiblePassword = !widget.visiblePassword;
-                });
-              },
-              icon: Icon(widget.visiblePassword? Icons.visibility_off:Icons.visibility)):null,
+          suffixIcon: widget.textInField == "Create password" ||
+                  widget.textInField == "Confirm password" ||
+                  widget.textInField == "Enter Your password"
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.visiblePassword = !widget.visiblePassword;
+                    });
+                  },
+                  icon: Icon(widget.visiblePassword
+                      ? Icons.visibility_off
+                      : Icons.visibility))
+              : null,
         ));
   }
 }

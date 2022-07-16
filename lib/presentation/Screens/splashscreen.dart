@@ -1,5 +1,5 @@
 import 'package:e_cart/constatnts/color/colors.dart';
-import 'package:e_cart/presentation/Screens/bottombar/homescreen.dart';
+import 'package:e_cart/presentation/Screens/bottombar/bottomnavbar.dart';
 import 'package:e_cart/presentation/Screens/login.dart';
 import 'package:e_cart/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class SplashScreen extends StatelessWidget {
           stream: Authservice().firebaseAuth.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return HomePage();
+              return BottomNavBarWidgetchange();
             }
             return LoginScreen();
           },

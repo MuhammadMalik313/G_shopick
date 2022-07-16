@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_cart/constatnts/color/colors.dart';
 
 import 'package:e_cart/presentation/Screens/splashscreen.dart';
@@ -9,6 +10,7 @@ import 'package:get/get.dart';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  
   runApp(MyApp());
 }
 
